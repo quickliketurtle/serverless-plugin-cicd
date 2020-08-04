@@ -139,6 +139,8 @@ class CICDPlugin {
                       'dynamodb:*',
                       'events:*',
                       'iam:*',
+                      'ssm:*',
+                      'secretsmanager:*',
                     ],
                     Resource: '*',
                   },
