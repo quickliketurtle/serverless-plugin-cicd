@@ -80,6 +80,17 @@ class CICDPlugin {
 
     const resource = {};
 
+    let buildEnvVars = service.custom.cicd.envVars || [];
+
+    buildEnvVars = buildEnvVars.map(envVar => {
+      for (const [key, value] of Object.entries(envVar)) {
+        return {
+          Name: key,
+          Value: value,
+        };
+      }
+    });
+
     // This role has a lot of access, but depending what you do with your buildspec
     // it might be needed!
     const role = {
@@ -174,6 +185,7 @@ class CICDPlugin {
                 Name: 'STAGE',
                 Value: `${stage}`,
               },
+              ...buildEnvVars,
             ],
           },
           Source: {
