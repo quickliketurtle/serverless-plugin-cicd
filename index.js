@@ -1,8 +1,7 @@
 const _ = require('lodash');
 
-const baseImage = 'aws/codebuild/ubuntu-base:14.04';
-const nodeImage = 'aws/codebuild/nodejs:6.3.1';
-const pythonImage = 'aws/codebuild/python:3.5.2';
+const baseImage = 'aws/codebuild/amazonlinux2-x86_64-standard:3.0';
+
 let stage;
 
 class CICDPlugin {
@@ -66,10 +65,6 @@ class CICDPlugin {
     if (service.custom.cicd) {
       if (service.custom.cicd.image != null) {
         image = service.custom.cicd.image;
-      } else if (service.provider.runtime.includes('node')) {
-        image = nodeImage;
-      } else if (service.provider.runtime.includes('python')) {
-        image = pythonImage;
       }
 
       gitOwner = service.custom.cicd.owner || '';
