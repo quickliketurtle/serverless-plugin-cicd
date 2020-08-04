@@ -80,16 +80,13 @@ class CICDPlugin {
 
     const resource = {};
 
-    let buildEnvVars = service.custom.cicd.envVars || [];
+    const buildEnvVars = service.custom.cicd.envVars
+      ? service.custom.cicd.envVars.map(envVar => {
+          const [[key, value]] = Object.entries(envVar);
 
-    buildEnvVars = buildEnvVars.map(envVar => {
-      for (const [key, value] of Object.entries(envVar)) {
-        return {
-          Name: key,
-          Value: value,
-        };
-      }
-    });
+          return { Name: key, Value: value };
+        })
+      : [];
 
     // This role has a lot of access, but depending what you do with your buildspec
     // it might be needed!
