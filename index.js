@@ -24,7 +24,7 @@ class CICDPlugin {
 
     stage = this.options.stage && this.options.stage.length > 0 ? this.options.stage : service.provider.stage;
     if (service.custom.cicd) {
-      if (service.custom.cicd.excludestages && service.custom.cicd.excludestages.includes('stage')) {
+      if (service.custom.cicd.excludestages && service.custom.cicd.excludestages.includes(stage)) {
         this.serverless.cli.log(`CICD is ignored for ${stage} stage`);
 
         return;
